@@ -1,13 +1,13 @@
-import { getStoreMatchPatterns, resolveStoreAdapter } from "@/src/runtime/adapter";
+import { getStoreMatchPatterns, resolveStoreAdapter } from '@/src/runtime/adapter';
 
 export default defineContentScript({
   matches: getStoreMatchPatterns(),
-  runAt: "document_idle",
+  runAt: 'document_idle',
   async main(ctx) {
     const store = resolveStoreAdapter(window.location.hostname);
 
     if (!store) {
-      console.log("No adapter found for this site");
+      console.log('No adapter found for this site');
       return;
     }
 

@@ -1,5 +1,5 @@
-import type { StoreAdapter } from "./StoreAdapter";
-import { SampleAdapter } from "./stores/SampleAdapter";
+import type { StoreAdapter } from './StoreAdapter';
+import { SampleAdapter } from './stores/SampleAdapter';
 
 interface StoreDefinition {
   hostname: string;
@@ -9,8 +9,8 @@ interface StoreDefinition {
 
 export const stores: StoreDefinition[] = [
   {
-    hostname: "www.sample.com",
-    match: "*://*.sample.com/*",
+    hostname: 'www.sample.com',
+    match: '*://*.sample.com/*',
     adapter: SampleAdapter,
   },
 ];

@@ -1,4 +1,4 @@
-import { BaseAdapter } from "./BaseAdapter";
+import { BaseAdapter } from './BaseAdapter';
 
 export interface StoreStructure {
     productView: {
