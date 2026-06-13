@@ -1,5 +1,6 @@
-import type { StoreAdapter } from './StoreAdapter';
 import { SampleAdapter } from './stores/SampleAdapter';
+
+import type { StoreAdapter } from './StoreAdapter';
 
 interface StoreDefinition {
   hostname: string;

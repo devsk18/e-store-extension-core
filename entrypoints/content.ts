@@ -3,7 +3,7 @@ import { getStoreMatchPatterns, resolveStoreAdapter } from '@/src/runtime/adapte
 export default defineContentScript({
   matches: getStoreMatchPatterns(),
   runAt: 'document_idle',
-  async main(ctx) {
+  main() {
     const store = resolveStoreAdapter(window.location.hostname);
 
     if (!store) {

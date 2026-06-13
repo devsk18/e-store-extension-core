@@ -1,4 +1,4 @@
-import { StoreAdapter, StoreStructure } from '../StoreAdapter';
+import { StoreAdapter } from '../StoreAdapter';
 
 export class SampleAdapter extends StoreAdapter {
   readonly structure = {
@@ -13,7 +13,7 @@ export class SampleAdapter extends StoreAdapter {
       getBarcode: (element: Element) => (element as HTMLElement).dataset.productCode ?? null,
     },
   };
-    
+
   // to check if product view exists
   doesProductViewExist() {
     return !!this.select(this.structure.productView.productElementSelector);
@@ -25,10 +25,10 @@ export class SampleAdapter extends StoreAdapter {
   }
 
   // to get product view element
-  getProductViewElement(): Element | null{
+  getProductViewElement(): Element | null {
     return this.select(this.structure.productView.productElementSelector);
   }
-    
+
   // to get product list elements
   getProductListElements(): Element[] {
     return this.selectAll(this.structure.listView.productElementSelector);

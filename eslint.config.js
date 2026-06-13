@@ -1,75 +1,100 @@
-import js from '@eslint/js';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+// eslint.config.js
 
-export default [
+import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import importPlugin from 'eslint-plugin-import';
+import reactHooks from 'eslint-plugin-react-hooks';
+import eslintConfigPrettier from 'eslint-config-prettier';
+
+export default tseslint.config(
   {
-    ignores: [
-      'node_modules',
-      '.wxt',
-      '.output',
-      'dist',
-      'build',
-      'coverage',
-      '*.min.js',
-      '.git',
-      '.github',
-      'public',
-      'assets',
-      'eslint.config.js'
-    ]
+    ignores: ['node_modules', '.wxt', '.output', 'dist', 'build', 'coverage', 'public', 'assets'],
   },
+
+  js.configs.recommended,
+
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['**/*.{ts,tsx}'],
+
+    extends: [
+      ...tseslint.configs.recommendedTypeChecked
+    ],
+
     languageOptions: {
-      parser: tsParser,
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        project: './tsconfig.json'
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
       },
+
       globals: {
-        console: 'readonly',
-        process: 'readonly',
-        window: 'readonly',
-        document: 'readonly',
+        ...globals.browser,
+        ...globals.node,
+
         browser: 'readonly',
         defineBackground: 'readonly',
-        defineContentScript: 'readonly'
-      }
+        defineContentScript: 'readonly',
+      },
     },
+
     plugins: {
-      '@typescript-eslint': tsPlugin
+      import: importPlugin,
+      'react-hooks': reactHooks,
     },
+
     rules: {
-      ...js.configs.recommended.rules,
-      ...tsPlugin.configs.recommended.rules,
-      '@typescript-eslint/explicit-function-return-type': 'warn',
-      '@typescript-eslint/explicit-member-accessibility': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
+      // TypeScript
+      'no-undef': 'off',
+
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          argsIgnorePattern: '^_'
-        }
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
       ],
-      'no-undef': 'error',
-      'semi': ['error', 'always'],
-      'indent': ['error', 2],
-      'quotes': ['error', 'single', { avoidEscape: true }]
-    }
-  },
-  {
-    files: ['**/*.js', '**/*.jsx'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module'
+
+      '@typescript-eslint/no-explicit-any': 'warn',
+
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          fixStyle: 'inline-type-imports',
+        },
+      ],
+
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/no-misused-promises': 'error',
+      '@typescript-eslint/await-thenable': 'error',
+
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/prefer-optional-chain': 'warn',
+
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+
+      // Imports
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'type'],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
+
+      // Hooks (works with Preact hooks too)
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
+      // General quality
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
     },
-    rules: {
-      ...js.configs.recommended.rules,
-      'semi': ['error', 'always'],
-      'indent': ['error', 2],
-      'quotes': ['error', 'single', { avoidEscape: true }]
-    }
-  }
-];
+  },
+  eslintConfigPrettier
+);
