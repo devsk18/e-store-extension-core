@@ -15,12 +15,12 @@ export class SampleAdapter extends StoreAdapter {
   };
 
   // to check if product view exists
-  doesProductViewExist() {
+  doesProductViewExist(): boolean {
     return !!this.select(this.structure.productView.productElementSelector);
   }
 
   // to check if product list exists
-  doesProductListExist() {
+  doesProductListExist(): boolean {
     return !!this.select(this.structure.listView.productElementSelector);
   }
 

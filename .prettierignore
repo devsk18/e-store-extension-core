@@ -1,0 +1,17 @@
+# Ignore build output and configuration files
+.github
+.output
+.wxt
+
+# Ignore environment variable files
+.env
+.env.*
+
+# Ignore files for PNPM, NPM and YARN
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+.pnpm-store/
+
+assets
+node_modules

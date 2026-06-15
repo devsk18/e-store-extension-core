@@ -1,4 +1,5 @@
 import { getStoreMatchPatterns, resolveStoreAdapter } from '@/src/runtime/adapter';
+import { Orchestrator } from '@/src/runtime/orchestrator/Orchestrator';
 
 export default defineContentScript({
   matches: getStoreMatchPatterns(),
@@ -11,6 +12,8 @@ export default defineContentScript({
       return;
     }
 
+    const orchestrator = new Orchestrator(store);
+    orchestrator.init();
     console.log(store);
   },
 });

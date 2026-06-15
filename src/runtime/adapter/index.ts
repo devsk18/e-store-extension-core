@@ -10,8 +10,8 @@ interface StoreDefinition {
 
 export const stores: StoreDefinition[] = [
   {
-    hostname: 'www.sample.com',
-    match: '*://*.sample.com/*',
+    hostname: 'www.metro.ca',
+    match: '*://*.metro.ca/*',
     adapter: SampleAdapter,
   },
 ];
