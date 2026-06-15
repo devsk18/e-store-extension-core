@@ -25,8 +25,8 @@ export abstract class StoreAdapter extends BaseAdapter {
   abstract getProductListElements(): Element[];
 
   // Product data extraction methods
-  abstract getDataFromProductViewElement(element: Element): any;
-  abstract getDataFromProductListElement(element: Element): any;
+  abstract getDataFromProductViewElement(element: Element): object; // need to create a type for the product data
+  abstract getDataFromProductListElement(element: Element): object;
 
   // Banner injection methods
   abstract injectViewItemBanner(target: Element): Element;

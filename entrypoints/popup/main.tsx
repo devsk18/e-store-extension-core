@@ -1,7 +1,7 @@
 import '../../assets/styles/popup.css';
-import { render } from 'preact';
+import { type JSX, render } from 'preact';
 
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <div className="popup-container">
       <h1 className="popup-title">E-store extension</h1>
